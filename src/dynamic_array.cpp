@@ -81,7 +81,7 @@ namespace assignment {
     if (index < size_ and index >= 0) {
       int flag = false;
       int val_of_deleted_index = data_[index];
-      for (int i; i < size_; i++) {
+      for (int i = 0; i < size_; i++) {
         if (flag == true) {
           if (i == size_ - 1) {
             data_[i] = {};
@@ -122,7 +122,7 @@ namespace assignment {
   }
 
   bool DynamicArray::Contains(int value) const {
-    for (int i; i < capacity_; i++) {
+    for (int i = 0; i < capacity_; i++) {
       if (data_[i] == value) {
         return true;
       }
@@ -150,7 +150,7 @@ namespace assignment {
       return false;
     }
     int* array = new int[new_capacity];
-    for (int i; i < size_; i++) {
+    for (int i = 0; i < size_; i++) {
       array[i] = data_[i];
     }
     delete data_;
