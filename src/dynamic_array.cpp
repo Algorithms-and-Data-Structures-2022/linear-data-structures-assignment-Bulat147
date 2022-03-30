@@ -113,12 +113,11 @@ namespace assignment {
   }
 
   std::optional<int> DynamicArray::IndexOf(int value) const {
-    for (int i; i < size_; i++) {
+    for (int i = 0; i < size_; i++) {
       if (data_[i] == value) {
         return i;
       }
     }
-
     return std::nullopt;
   }
 
