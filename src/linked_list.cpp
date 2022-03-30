@@ -17,26 +17,25 @@ namespace assignment {
       size_ += 1;
     }
   }
+
   bool LinkedList::Insert(int index, int value) {
-    if (index < 0 or index >size_){
+    if (index < 0 or index > size_) {
       return false;
     }
-    if (index == 0){
+    if (index == 0) {
       Node* last = front_;
       front_ = new Node(value);
-      if (size_ == 0){
+      if (size_ == 0) {
         back_ = front_;
       }
       front_->next = last;
       size_ += 1;
-    }
-    else if (index == size_){
+    } else if (index == size_) {
       LinkedList::Add(value);
-    }
-    else{
+    } else {
       int i = 0;
       Node* nd = front_;
-      while (i != index-1){
+      while (i != index - 1) {
         nd = nd->next;
         i++;
       }
@@ -49,12 +48,12 @@ namespace assignment {
   }
 
   bool LinkedList::Set(int index, int new_value) {
-    if (index < 0 or index>=size_) {
+    if (index < 0 or index >= size_) {
       return false;
     }
     Node* nd = front_;
     int i = 0;
-    while (i != index){
+    while (i != index) {
       nd = nd->next;
       i++;
     }
@@ -67,7 +66,7 @@ namespace assignment {
       if (index == 0) {
         Node* for_del = front_;
         front_ = front_->next;
-        if (size_ == 1){
+        if (size_ == 1) {
           back_ = nullptr;
         }
         size_ -= 1;
@@ -81,7 +80,7 @@ namespace assignment {
           i++;
         }
         Node* for_del = nd->next;
-        if (index == size_-1){
+        if (index == size_ - 1) {
           back_ = nd;
         }
         nd->next = nd->next->next;
@@ -92,33 +91,39 @@ namespace assignment {
   }
 
   void LinkedList::Clear() {
-    while (front_ != nullptr){
-      Node* for_del = front_;
-      front_ = front_->next;
-      delete for_del;
+
+    /* FIXED */
+
+    for (Node* curr = front_; curr != nullptr; /* ... */) {
+      Node* to_remove = curr;
+      curr = curr->next;
+      delete to_remove;
     }
-    front_ = nullptr;
-    back_ = nullptr;
+
     size_ = 0;
+    back_ = nullptr;
+    front_ = nullptr;
   }
 
   std::optional<int> LinkedList::Get(int index) const {
-    if (index >= 0 and index < size_){
+    if (index >= 0 and index < size_) {
       Node* nd = front_;
       int i = 0;
-      while (i != index){
+      while (i != index) {
         nd = nd->next;
         i++;
       }
       return nd->value;
     }
+
+    return std::nullopt;
   }
 
   std::optional<int> LinkedList::IndexOf(int value) const {
     Node* nd = front_;
     int i = 0;
-    while (nd != nullptr){
-      if (nd->value == value){
+    while (nd != nullptr) {
+      if (nd->value == value) {
         return i;
       }
       nd = nd->next;
@@ -128,8 +133,8 @@ namespace assignment {
 
   bool LinkedList::Contains(int value) const {
     Node* nd = front_;
-    while (nd != nullptr){
-      if (nd->value == value){
+    while (nd != nullptr) {
+      if (nd->value == value) {
         return true;
       }
       nd = nd->next;
@@ -138,7 +143,7 @@ namespace assignment {
   }
 
   bool LinkedList::IsEmpty() const {
-    if (size_ == 0){
+    if (size_ == 0) {
       return true;
     }
     return false;
@@ -149,22 +154,26 @@ namespace assignment {
   }
 
   std::optional<int> LinkedList::front() const {
-    if (front_ != nullptr){
+    if (front_ != nullptr) {
       return front_->value;
     }
+
+    return std::nullopt;
   }
 
   std::optional<int> LinkedList::back() const {
-    if (back_ != nullptr){
+    if (back_ != nullptr) {
       return back_->value;
     }
+
+    return std::nullopt;
   }
 
   Node* LinkedList::FindNode(int index) const {
-    if (index >= 0 and index < size_){
+    if (index >= 0 and index < size_) {
       Node* nd = front_;
       int i = 0;
-      while (i != index){
+      while (i != index) {
         nd = nd->next;
         i++;
       }

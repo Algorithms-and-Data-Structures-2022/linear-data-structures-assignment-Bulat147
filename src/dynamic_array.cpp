@@ -24,12 +24,11 @@ namespace assignment {
 
   void DynamicArray::Add(int value) {
     int* array;
-    if (size_ < capacity_){
+    if (size_ < capacity_) {
       data_[size_] = value;
-    }
-    else{
-      array = new int[capacity_+kCapacityGrowthCoefficient];
-      for (int i; i < size_; i++){
+    } else {
+      array = new int[capacity_ + kCapacityGrowthCoefficient];
+      for (int i; i < size_; i++) {
         array[i] = data_[i];
       }
       delete[] data_;
@@ -41,28 +40,25 @@ namespace assignment {
   }
 
   bool DynamicArray::Insert(int index, int value) {
-    if (index > size_ or index < 0){
+    if (index > size_ or index < 0) {
       return false;
     }
     int new_capacity;
-    if (size_ < capacity_){
+    if (size_ < capacity_) {
       new_capacity = capacity_;
-    }
-    else if (size_ == capacity_){
+    } else if (size_ == capacity_) {
       new_capacity = capacity_ + kCapacityGrowthCoefficient;
     }
 
     int* array = new int[new_capacity]{};
     bool flag = false;
-    for (int i = 0; i < size_+1;i++){
-      if (i == index){
+    for (int i = 0; i < size_ + 1; i++) {
+      if (i == index) {
         array[i] = value;
         flag = true;
-      }
-      else if (flag == true){
-        array[i] = data_[i-1];
-      }
-      else if (flag == false){
+      } else if (flag == true) {
+        array[i] = data_[i - 1];
+      } else if (flag == false) {
         array[i] = data_[i];
       }
     }
@@ -74,7 +70,7 @@ namespace assignment {
   }
 
   bool DynamicArray::Set(int index, int new_value) {
-    if (index >= size_ || index < 0){
+    if (index >= size_ || index < 0) {
       return false;
     }
     data_[index] = new_value;
@@ -112,6 +108,8 @@ namespace assignment {
     if (index < size_ and index >= 0) {
       return data_[index];
     }
+
+    return std::nullopt;
   }
 
   std::optional<int> DynamicArray::IndexOf(int value) const {
@@ -120,11 +118,13 @@ namespace assignment {
         return i;
       }
     }
+
+    return std::nullopt;
   }
 
   bool DynamicArray::Contains(int value) const {
-    for (int i; i<capacity_; i++){
-      if (data_[i] == value){
+    for (int i; i < capacity_; i++) {
+      if (data_[i] == value) {
         return true;
       }
     }
@@ -132,7 +132,7 @@ namespace assignment {
   }
 
   bool DynamicArray::IsEmpty() const {
-    if (size_ == 0){
+    if (size_ == 0) {
       return true;
     }
     return false;
@@ -147,11 +147,11 @@ namespace assignment {
   }
 
   bool DynamicArray::Resize(int new_capacity) {
-    if (new_capacity <= capacity_){
+    if (new_capacity <= capacity_) {
       return false;
     }
     int* array = new int[new_capacity];
-    for (int i; i < size_; i++){
+    for (int i; i < size_; i++) {
       array[i] = data_[i];
     }
     delete data_;

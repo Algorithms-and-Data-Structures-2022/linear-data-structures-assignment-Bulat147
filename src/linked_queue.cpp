@@ -10,11 +10,10 @@ namespace assignment {
 
   void LinkedQueue::Enqueue(int value) {
     Node* nd = new Node(value);
-    if (size_ == 0){
+    if (size_ == 0) {
       front_ = nd;
       back_ = nd;
-    }
-    else{
+    } else {
       back_->next = nd;
       back_ = nd;
     }
@@ -33,29 +32,36 @@ namespace assignment {
   }
 
   void LinkedQueue::Clear() {
+
+    for (Node* curr = front_; curr != nullptr; /* ... */) {
+      Node* to_remove = curr;
+      curr = curr->next;
+      delete to_remove;
+    }
+
+    front_ = nullptr;
     back_ = nullptr;
-    while (front_ != nullptr){
-        Node* last = front_;
-        front_ = front_->next;
-        delete last;
-      }
     size_ = 0;
   }
 
   std::optional<int> LinkedQueue::front() const {
-    if (front_ != nullptr){
+    if (front_ != nullptr) {
       return front_->value;
     }
+
+    return std::nullopt;
   }
 
   std::optional<int> LinkedQueue::back() const {
-    if (back_ != nullptr){
+    if (back_ != nullptr) {
       return back_->value;
     }
+
+    return std::nullopt;
   }
 
   bool LinkedQueue::IsEmpty() const {
-    if (size_ == 0){
+    if (size_ == 0) {
       return true;
     }
     return false;

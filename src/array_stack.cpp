@@ -24,8 +24,8 @@ namespace assignment {
   }
 
   void ArrayStack::Push(int value) {
-    if (size_ == capacity_){
-      ArrayStack::Resize(capacity_+kCapacityGrowthCoefficient);
+    if (size_ == capacity_) {
+      ArrayStack::Resize(capacity_ + kCapacityGrowthCoefficient);
     }
     data_[size_] = value;
     size_ += 1;
@@ -35,7 +35,7 @@ namespace assignment {
     if (size_ == 0) {
       return false;
     }
-    data_[size_-1] = {};
+    data_[size_ - 1] = {};
     size_ -= 1;
     return true;
   }
@@ -47,13 +47,15 @@ namespace assignment {
   }
 
   std::optional<int> ArrayStack::Peek() const {
-    if (size_ != 0){
-      return data_[size_-1];
+    if (size_ != 0) {
+      return data_[size_ - 1];
     }
+
+    return std::nullopt;
   }
 
   bool ArrayStack::IsEmpty() const {
-    if (size_ == 0){
+    if (size_ == 0) {
       return true;
     }
     return false;
@@ -72,7 +74,7 @@ namespace assignment {
       return false;
     }
     int* array = new int[new_capacity]{};
-    for (int i = 0; i < size_; i++){
+    for (int i = 0; i < size_; i++) {
       array[i] = data_[i];
     }
     delete[] data_;
